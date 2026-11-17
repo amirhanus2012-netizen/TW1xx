@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS VR — Очки Виртуальной Реальности Нового Поколения | Официальный сайт</title>
+  <meta name="description" content="Инновационные VR-очки с 4K Micro-OLED дисплеями, 6DoF трекингом и пространственным звуком. Скидка до 40%. Личный консультант: Амирхан (+7 777 777 7777).">
+
+  <!-- Proxy Shield & Cyber Defense Meta Headers (Защита от взлома) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com data: blob:;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Fixed 3D Background Canvas (Moving 3D VR Glasses in Cyberspace) -->
+  <canvas id="bg-canvas"></canvas>
+  <div class="bg-ambient-lights"></div>
+
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress-bar"></div>
+
+  <!-- Site Content -->
+  <div class="content-wrapper">
+
+    <!-- Top Navigation Header -->
+    <header class="header">
+      <div class="container header-container">
+        <a href="#" class="brand-logo">
+          <div class="logo-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 10s3-4 10-4 10 4 10 4-1 6-4 7-6-1-6-1-3 2-6 1-4-7-4-7z"></path>
+              <circle cx="7" cy="11" r="2"></circle>
+              <circle cx="17" cy="11" r="2"></circle>
+            </svg>
+          </div>
+          <span>NEXUS<span class="brand-highlight">VR</span></span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#about" class="nav-link">Цены и скидки</a></li>
+          <li><a href="#studio" class="nav-link">Как выглядят очки</a></li>
+          <li><a href="#why-vr" class="nav-link">Зачем они нужны</a></li>
+          <li><a href="#simulator" class="nav-link">Игры & Windows ПК</a></li>
+          <li><a href="#contacts" class="nav-link">Контакты</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+
+        <div class="header-actions">
+          <!-- Proxy Shield Status Badge -->
+          <button class="proxy-shield-badge-btn" onclick="window.proxyShieldInstance.openSecurityModal()" title="Нажмите для проверки статуса прокси-защиты">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>Proxy Shield</span>
+          </button>
+
+          <!-- Direct Call Pill to Amirkhan (+7 777 777 7777) -->
+          <a href="tel:+77777777777" class="header-phone-pill" title="Позвонить Амирхану">
+            <span class="pulse-dot-green"></span>
+            <div>
+              <span class="phone-num">+7 777 777 7777</span>
+              <span class="phone-label">Ответит: Амирхан</span>
+            </div>
+          </a>
+
+          <!-- Procedural Sound Effects Toggle -->
+          <button id="audio-toggle-btn" class="audio-btn" title="Включить/выключить звуковые эффекты интерфейса">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+            <span>Звук: ВЫКЛ</span>
+          </button>
+
+          <button class="btn-cta open-order-modal header-cta">
+            <span>Заказать со скидкой</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+
+          <button class="mobile-menu-btn" id="mobile-menu-toggle" aria-label="Открыть меню">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-nav-drawer" id="mobile-nav">
+      <a href="#about" class="mobile-link">Цены и скидки</a>
+      <a href="#studio" class="mobile-link">Как выглядят 3D очки</a>
+      <a href="#why-vr" class="mobile-link">Зачем они нужны</a>
+      <a href="#simulator" class="mobile-link">Игры & Рабочий Стол Windows</a>
+      <a href="#contacts" class="mobile-link">Контакты (Амирхан)</a>
+      <a href="#faq" class="mobile-link">FAQ</a>
+      <div style="padding: 12px; background: rgba(0,240,255,0.08); border-radius: 12px; margin-top: 10px; text-align: center;">
+        <span style="font-size: 0.8rem; color: #10b981; display: block; margin-bottom: 4px;">● Личный консультант: Амирхан</span>
+        <a href="tel:+77777777777" style="font-family: monospace; font-size: 1.2rem; font-weight: 800; color: #00f0ff; text-decoration: none;">+7 777 777 7777</a>
+      </div>
+      <button class="btn-cta open-order-modal" style="width: 100%; justify-content: center; margin-top: 10px;">Заказать со скидкой 40%</button>
+    </div>
+
+    <!-- 1. HERO SECTION: ЦЕНЫ И СКИДКА НА НАЧАЛЬНОЙ СТРАНИЦЕ -->
+    <section class="section hero-section" id="about">
+      <div class="container hero-grid">
+        <div class="hero-content">
+
+          <!-- High-Tech Badge -->
+          <div class="hero-badge-container">
+            <span class="badge-pulse-dot"></span>
+            <span class="badge-text">ОФИЦИАЛЬНЫЙ САЙТ NEXUS VR // ЛИЧНЫЙ КОНСУЛЬТАНТ: АМИРХАН</span>
+          </div>
+
+          <!-- THE REQUIRED DEFINITION QUOTE -->
+          <div class="hero-definition-card">
+            <div class="definition-glow-bar"></div>
+            <div class="card-header-bar">
+              <div class="definition-tag">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                <span>ОПРЕДЕЛЕНИЕ ТЕХНОЛОГИИ</span>
+              </div>
+              <button id="speak-quote-btn" class="speak-btn" title="Прослушать определение с помощью синтезатора речи">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                </svg>
+                <span>Озвучить</span>
+              </button>
+            </div>
+            <blockquote class="hero-quote-text">
+              «VR-очки— это специальные устройства, которые надеваются на голову и создают для пользователя иллюзию присутствия в трехмерном виртуальном мире»
+            </blockquote>
+          </div>
+
+          <!-- Hero Main Title -->
+          <h1 class="hero-title">
+            VR-Очки Будущего <br>
+            <span class="gradient-text">Цены и Скидка 40%</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Ощутите полное стирание грани между физическим и цифровым миром. Сверхчеткая оптика Pancake, пространственный звук Spatial Audio и трекинг 6DoF с субмиллиметровой точностью.
+          </p>
+
+          <!-- FLASH SALE DISCOUNT PROMO BANNER -->
+          <div class="flash-sale-hero-banner">
+            <div class="flash-sale-badge">
+              <span>🔥</span>
+              <span>ГОРЯЧАЯ СКИДКА ДО -40% НА ПЕРВУЮ ПАРТИЮ</span>
+            </div>
+            <div class="flash-timer-wrapper">
+              <span class="timer-label">Скидка действует еще:</span>
+              <div class="timer-countdown">
+                <span class="timer-box"><span id="t-hours">04</span><small>ч</small></span>:
+                <span class="timer-box"><span id="t-mins">28</span><small>м</small></span>:
+                <span class="timer-box"><span id="t-secs">19</span><small>с</small></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================================================================
+               ЦЕНЫ И СКИДКА НА НАЧАЛЬНОЙ СТРАНИЦЕ САЙТА
+               ========================================================================= -->
+          <div class="hero-pricing-grid">
+            <!-- Card 1: Lite -->
+            <div class="hero-price-card">
+              <div class="price-card-tier">LITE EDITION</div>
+              <div class="price-discount-pill">-40% СКИДКА</div>
+              <div class="price-values">
+                <div class="old-price">65 000 ₽ <span class="kzt-sub">(330 000 ₸)</span></div>
+                <div class="new-price">39 000 ₽ <span class="kzt-main">(198 000 ₸)</span></div>
+              </div>
+              <ul class="price-features">
+                <li>✓ Micro-OLED 4K 90 Гц</li>
+                <li>✓ 2 тактильных VR-контроллера Touch</li>
+                <li>✓ Беспроводной Wi-Fi 6E + Bluetooth 5.4</li>
+                <li>✓ Официальная гарантия 1 год</li>
+              </ul>
+              <button class="btn-price-order open-order-modal" data-plan="Lite">Заказать Lite</button>
+            </div>
+
+            <!-- Card 2: Pro (Hit) -->
+            <div class="hero-price-card featured">
+              <div class="price-hot-ribbon">⭐ ХИТ ПРОДАЖ</div>
+              <div class="price-card-tier">PRO EDITION 120Hz</div>
+              <div class="price-discount-pill">-40% СКИДКА</div>
+              <div class="price-values">
+                <div class="old-price">95 000 ₽ <span class="kzt-sub">(480 000 ₸)</span></div>
+                <div class="new-price">57 000 ₽ <span class="kzt-main">(288 000 ₸)</span></div>
+              </div>
+              <ul class="price-features">
+                <li>✓ Dual 4K 120 Гц + оптика Pancake</li>
+                <li>✓ LiDAR 6DoF трекинг пространства</li>
+                <li>✓ Стриминг с ПК по Wi-Fi 7 (SteamVR)</li>
+                <li>✓ Кабель PC Link 40 Gbps в комплекте</li>
+                <li>✓ 2 года расширенной гарантии</li>
+              </ul>
+              <button class="btn-price-order featured-btn open-order-modal" data-plan="Pro">Заказать Pro со скидкой</button>
+            </div>
+
+            <!-- Card 3: Ultimate -->
+            <div class="hero-price-card">
+              <div class="price-card-tier">ULTIMATE 2026</div>
+              <div class="price-discount-pill">-40% СКИДКА</div>
+              <div class="price-values">
+                <div class="old-price">130 000 ₽ <span class="kzt-sub">(650 000 ₸)</span></div>
+                <div class="new-price">78 000 ₽ <span class="kzt-main">(390 000 ₸)</span></div>
+              </div>
+              <ul class="price-features">
+                <li>✓ Всё из комплекта Pro Edition</li>
+                <li>✓ Тактильный виброжилет Haptic Suit</li>
+                <li>✓ Док-станция беспроводной зарядки</li>
+                <li>✓ Сменные магнитные диоптрийные линзы</li>
+                <li>✓ Личная VIP-настройка от Амирхана</li>
+              </ul>
+              <button class="btn-price-order open-order-modal" data-plan="Ultimate">Заказать Ultimate</button>
+            </div>
+          </div>
+
+          <!-- =========================================================================
+               КНОПКА СРАЗУ ПОСЛЕ ЦЕН: КАК ВЫГЛЯДЯТ 3D ОЧКИ И ЗАЧЕМ ОНИ НУЖНЫ
+               ========================================================================= -->
+          <div class="hero-after-prices-action">
+            <a href="#studio" class="btn-hero-glasses-guide">
+              <span class="btn-guide-icon">🥽</span>
+              <span class="btn-guide-text">
+                <span class="main-label">КАК ВЫГЛЯДЯТ 3D ОЧКИ И ЗАЧЕМ ОНИ НУЖНЫ?</span>
+                <span class="sub-label">Посмотрите 3D-модель со всех сторон и узнайте 5 главных причин покупки ↓</span>
+              </span>
+              <span class="btn-guide-arrow">➜</span>
+            </a>
+          </div>
+
+          <!-- =========================================================================
+               ТОЧНЫЕ ДАННЫЕ ПОЛЬЗОВАТЕЛЯ: АМИРХАН, +7 777 777 7777
+               ========================================================================= -->
+          <div class="hero-contact-trust-bar">
+            <div class="contact-agent-avatar">
+              <div class="avatar-ring">
+                <span class="avatar-letter">А</span>
+                <span class="online-indicator" title="В сети"></span>
+              </div>
+            </div>
+            <div class="contact-agent-info">
+              <div class="agent-title">Официальный консультант: <strong>Амирхан</strong></div>
+              <div class="agent-phone-row">
+                <span>Прямой номер:</span>
+                <a href="tel:+77777777777" class="agent-phone-link">+7 777 777 7777</a>
+                <span class="agent-note">● Вам ответит: Амирхан</span>
+              </div>
+            </div>
+            <div class="contact-agent-actions">
+              <a href="https://wa.me/77777777777" target="_blank" class="contact-badge-btn wa">WhatsApp</a>
+              <a href="https://t.me/+77777777777" target="_blank" class="contact-badge-btn tg">Telegram</a>
+              <button class="contact-badge-btn call open-order-modal">Заказать звонок</button>
+            </div>
+          </div>
+
+          <!-- Quick Metrics Row -->
+          <div class="hero-stats-row" style="margin-top: 24px;">
+            <div class="stat-item">
+              <span class="stat-value">4K</span>
+              <span class="stat-label">Micro-OLED на глаз</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">120 Гц</span>
+              <span class="stat-label">Частота обновления</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">110°</span>
+              <span class="stat-label">Угол обзора FOV</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">&lt; 12 мс</span>
+              <span class="stat-label">Задержка трекинга</span>
+            </div>
+          </div>
+
+          <!-- PC Desktop Connection & Mobile Support Banner -->
+          <div class="hero-pc-banner" style="margin-top: 24px;">
+            <div class="pc-banner-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <div class="pc-banner-content">
+              <h4>Подключение рабочего стола через ПК и поддержка смартфонов</h4>
+              <p>
+                Транслируйте экран вашего ПК на 3 огромных виртуальных 4K-монитора по Wi-Fi 7 или USB-C (40 Гбит/с). Играйте в игры SteamVR с компьютера или используйте автономно со смартфоном (iOS и Android) — новейшие технологии 2026 года!
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Side: Interactive Hero Showcase Column -->
+        <div class="hero-showcase-column">
+          <div class="hero-visual-card">
+            <div class="visual-badge">
+              <span class="badge-pulse-dot"></span>
+              <span>ИНТЕРАКТИВНАЯ 3D-МОДЕЛЬ // В РЕАЛЬНОМ ВРЕМЕНИ</span>
+            </div>
+            <div class="visual-pills">
+              <span class="pill-item">Плавное 3D вращение</span>
+              <span class="pill-item">PBR оптика Pancake</span>
+              <span class="pill-item">Micro-OLED 4K</span>
+              <span class="pill-item">6DoF Пространство</span>
+              <span class="pill-item">Скидка -40%</span>
+              <span class="pill-item">🛡️ Proxy Shield WAF</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. КАК ВЫГЛЯДЯТ 3D ОЧКИ И ЗАЧЕМ ОНИ НУЖНЫ (Интерактивная 3D Студия) -->
+    <section class="section studio-section" id="studio">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">3D МОДЕЛЬ В РЕАЛЬНОМ ВРЕМЕНИ</span>
+          <h2 class="section-title">Как выглядят 3D очки NEXUS VR</h2>
+          <p class="section-subtitle">
+            Вращайте модель курсором на 360°, приближайте колесиком мыши, меняйте цветовые темы корпуса и изучайте внутреннее устройство оптических систем.
+          </p>
+        </div>
+
+        <div class="studio-wrapper">
+          <!-- Studio Top Toolbar -->
+          <div class="studio-toolbar">
+            <!-- Angles -->
+            <div class="toolbar-group">
+              <span class="toolbar-label">Ракурс:</span>
+              <div class="pill-btn-group">
+                <button class="angle-btn active" data-angle="isometric">360° Тур</button>
+                <button class="angle-btn" data-angle="front">Фронт</button>
+                <button class="angle-btn" data-angle="lenses">Линзы изнутри</button>
+                <button class="angle-btn" data-angle="side">Профиль</button>
+                <button class="angle-btn" data-angle="top">Сверху</button>
+              </div>
+            </div>
+
+            <!-- Color Swatches -->
+            <div class="toolbar-group">
+              <span class="toolbar-label">Цвет корпуса:</span>
+              <div class="color-swatches">
+                <button class="color-swatch swatch-obsidian active" data-theme="obsidian" title="Cosmic Obsidian"></button>
+                <button class="color-swatch swatch-glacier" data-theme="glacier" title="Glacier Pure"></button>
+                <button class="color-swatch swatch-cyber" data-theme="cyber" title="Cyber Neon"></button>
+                <button class="color-swatch swatch-titanium" data-theme="titanium" title="Titanium Gold"></button>
+              </div>
+            </div>
+
+            <!-- Render Modes -->
+            <div class="toolbar-group">
+              <span class="toolbar-label">Режим:</span>
+              <div class="pill-btn-group">
+                <button class="mode-btn active" data-mode="realistic">PBR</button>
+                <button class="mode-btn" data-mode="wireframe">Сетка</button>
+                <button class="mode-btn" data-mode="hologram">Голограмма</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3D Viewport with Hotspots Overlay -->
+          <div id="studio-canvas-container">
+            <canvas id="studio-canvas"></canvas>
+            <div id="hotspots-overlay"></div>
+          </div>
+
+          <!-- Studio Footer Controls & Hints -->
+          <div class="studio-footer-bar">
+            <div class="studio-instructions">
+              <div class="instruction-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2v20M2 12h20"></path>
+                </svg>
+                <span>Зажмите ЛКМ для свободного вращения</span>
+              </div>
+              <div class="instruction-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <span>Колесико для зума</span>
+              </div>
+            </div>
+
+            <div class="toolbar-group">
+              <button id="btn-auto-rotate" class="audio-btn active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                </svg>
+                <span class="label">Вращение: Вкл</span>
+              </button>
+              <button id="btn-reset-view" class="audio-btn">
+                <span>Сбросить вид</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- =========================================================================
+             ПОДРОБНЫЙ РАЗБОР: ЗАЧЕМ ВООБЩЕ НУЖНЫ 3D ОЧКИ В 2026 ГОДУ
+             ========================================================================= -->
+        <div class="why-vr-section-container" id="why-vr">
+          <div class="section-header" style="margin-top: 50px;">
+            <span class="section-tag">ПОЛЬЗА И СФЕРЫ ПРИМЕНЕНИЯ</span>
+            <h2 class="section-title">Зачем вообще нужны 3D VR-очки?</h2>
+            <p class="section-subtitle">
+              VR-очки — это не просто развлечение, а революционный персональный компьютер и медиасистема. Вот 5 главных причин, почему они нужны каждому:
+            </p>
+          </div>
+
+          <div class="why-vr-grid">
+            <div class="why-vr-card">
+              <div class="why-vr-card-num">01 // ИГРЫ И ГЕЙМИНГ</div>
+              <div class="why-vr-card-icon">🎮</div>
+              <h3>100% Эффект присутствия в играх</h3>
+              <p>
+                Вы больше не сидите перед монитором — вы находитесь внутри игры! Ваши руки держат лазерные мечи в Beat Saber или оружие в Half-Life: Alyx. Вы физически уворачиваетесь от пуль телом и чувствуете каждый шаг.
+              </p>
+            </div>
+
+            <div class="why-vr-card">
+              <div class="why-vr-card-num">02 // 3D КИНОТЕАТР IMAX</div>
+              <div class="why-vr-card-icon">🎬</div>
+              <h3>Персональный IMAX экран на 110 дюймов</h3>
+              <p>
+                Смотрите любимые фильмы, сериалы и YouTube на гигантском виртуальном экране, как в настоящем премиальном кинотеатре. Полная поддержка 3D-видео, фильмов с объемным звуком 360° и эффекта присутствия в зале.
+              </p>
+            </div>
+
+            <div class="why-vr-card">
+              <div class="why-vr-card-num">03 // РАБОТА И ПК</div>
+              <div class="why-vr-card-icon">💻</div>
+              <h3>Рабочий стол с 3 виртуальными мониторами</h3>
+              <p>
+                Подключите очки к любому ПК или ноутбуку (Windows / Mac) по Wi-Fi 7 или USB-C и разверните рабочее пространство без покупки физических мониторов. Программируйте, торгуйте или монтируйте видео в любой точке мира.
+              </p>
+            </div>
+
+            <div class="why-vr-card">
+              <div class="why-vr-card-num">04 // ПУТЕШЕСТВИЯ И КОСМОС</div>
+              <div class="why-vr-card-icon">🚀</div>
+              <h3>Виртуальный туризм и симуляторы</h3>
+              <p>
+                Поднимитесь на вершину Эвереста, прогуляйтесь по улицам Токио или Парижа, погрузитесь на дно океана к китам или посетите Международную Космическую Станцию, не выходя из собственной комнаты!
+              </p>
+            </div>
+
+            <div class="why-vr-card">
+              <div class="why-vr-card-num">05 // ФИТНЕС И ОБУЧЕНИЕ</div>
+              <div class="why-vr-card-icon">🏋️</div>
+              <h3>Фитнес в удовольствие и тренировка навыков</h3>
+              <p>
+                Сжигайте до 500 ккал за игровую сессию в динамичных ритм-играх и симуляторах бокса. VR также используется пилотами, хирургами и архитекторами для безопасной отработки профессиональных навыков.
+              </p>
+            </div>
+
+            <div class="why-vr-card" style="border-color: var(--cyan-neon); background: rgba(0,240,255,0.06);">
+              <div class="why-vr-card-num">06 // ЗАКАЗ У АМИРХАНА</div>
+              <div class="why-vr-card-icon">📞</div>
+              <h3>Индивидуальный подбор и тест-драйв</h3>
+              <p>
+                Сомневаетесь, какая модель подойдет под ваш компьютер или смартфон? Позвоните по номеру <strong>+7 777 777 7777</strong> — консультант <strong>Амирхан</strong> лично ответит на все вопросы и оформит заказ со скидкой 40%!
+              </p>
+              <button class="btn-cta open-order-modal" style="margin-top: 12px; width: 100%; justify-content: center; padding: 10px;">
+                Связаться с Амирханом
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3. HOW IT WORKS (Technology Breakdown) -->
+    <section class="section" id="technology">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">ТЕХНОЛОГИЧЕСКИЙ СТЕК</span>
+          <h2 class="section-title">Как устроены VR-очки</h2>
+          <p class="section-subtitle">
+            Сочетание передовой оптической физики, высокоскоростных дисплеев и искусственного интеллекта для создания реалистичной иллюзии присутствия.
+          </p>
+        </div>
+
+        <div class="tech-grid">
+          <!-- Card 1 -->
+          <div class="tech-card">
+            <div class="tech-card-num">01 // OPTICS</div>
+            <div class="tech-icon-box">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"></path>
+              </svg>
+            </div>
+            <h3>Бинокулярная оптика Pancake</h3>
+            <p>
+              Каждый глаз получает отдельное изображение со смещенного ракурса. Сложенная поляризационная оптика устраняет хроматические аберрации и сокращает толщину очков в 2.5 раза.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="tech-card">
+            <div class="tech-card-num">02 // TRACKING</div>
+            <div class="tech-icon-box">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            </div>
+            <h3>6 степеней свободы (6DoF)</h3>
+            <p>
+              Встроенные гироскопы, акселерометры и 4 внешние камеры непрерывно сканируют геометрию комнаты. Вы можете свободно наклоняться, приседать и ходить в виртуальном пространстве.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="tech-card">
+            <div class="tech-card-num">03 // AUDIO</div>
+            <div class="tech-icon-box">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+                <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+              </svg>
+            </div>
+            <h3>Пространственный 3D-звук</h3>
+            <p>
+              Алгоритмы HRTF моделируют прохождение звуковых волн сквозь виртуальные стены и объекты. Вы на слух определяете точное расстояние и направление до источника звука.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="tech-card">
+            <div class="tech-card-num">04 // DISPLAY</div>
+            <div class="tech-icon-box">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <h3>4K Micro-OLED 120Hz</h3>
+            <p>
+              Плотность свыше 3500 пикселей на дюйм полностью побеждает эффект «москитной сетки» (screen door effect). Плавные 120 кадров в секунду гарантируют комфорт без головокружения.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. РЕАЛИСТИЧНЫЕ ИГРЫ И РАБОЧИЙ СТОЛ WINDOWS (ИНТЕРАКТИВНЫЙ СИМУЛЯТОР) -->
+    <section class="section simulator-section" id="simulator">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">РЕАЛИСТИЧНЫЕ ИГРЫ // РАБОЧИЙ СТОЛ WINDOWS</span>
+          <h2 class="section-title">Симулятор Рабочего Стола Windows и Реалистичные Игры</h2>
+          <p class="section-subtitle">
+            Почувствуйте себя за настоящим рабочим столом Windows 11! Запускайте играбельные игры (Beat Saber со световыми мечами и 3D тир), оформляйте заказ со скидкой и управляйте защитой прокси.
+          </p>
+        </div>
+
+        <!-- Mode Switcher: Windows Desktop Simulator vs 3D VR World -->
+        <div class="sim-mode-switcher-bar">
+          <button class="sim-mode-tab active" id="tab-mode-desktop">
+            <span>🖥️</span>
+            <span>Рабочий стол Windows 11 (Игры и Заказ)</span>
+          </button>
+          <button class="sim-mode-tab" id="tab-mode-vr360">
+            <span>🥽</span>
+            <span>3D VR Взгляд изнутри шлема (360° Арена)</span>
+          </button>
+        </div>
+
+        <!-- =========================================================================
+             A. ИНТЕРАКТИВНЫЙ РАБОЧИЙ СТОЛ WINDOWS 11 (Cyberpunk Windows Desktop UI)
+             ========================================================================= -->
+        <div id="windows-desktop-container">
+          <!-- Wallpaper -->
+          <div class="win-desktop-wallpaper"></div>
+
+          <!-- Desktop Icons Column -->
+          <div class="win-desktop-icons-grid">
+            <div class="win-desktop-icon" data-app="app-beatsaber">
+              <span class="win-icon-glyph">⚡</span>
+              <span class="win-icon-label">Beat Saber VR.exe</span>
+            </div>
+            <div class="win-desktop-icon" data-app="app-target-shooter">
+              <span class="win-icon-glyph">🎯</span>
+              <span class="win-icon-label">Cyber Target 3D.exe</span>
+            </div>
+            <div class="win-desktop-icon" data-app="app-store">
+              <span class="win-icon-glyph">🛒</span>
+              <span class="win-icon-label">Магазин VR (-40%).exe</span>
+            </div>
+            <div class="win-desktop-icon" data-app="app-glasses-guide">
+              <span class="win-icon-glyph">🥽</span>
+              <span class="win-icon-label">3D Очки & Гид.pdf</span>
+            </div>
+            <div class="win-desktop-icon" data-app="app-proxy-guard">
+              <span class="win-icon-glyph">🛡️</span>
+              <span class="win-icon-label">Proxy Guard WAF.exe</span>
+            </div>
+            <div class="win-desktop-icon" data-app="app-contacts">
+              <span class="win-icon-glyph">📞</span>
+              <span class="win-icon-label">Связь с Амирханом.exe</span>
+            </div>
+            <div class="win-desktop-icon" data-app="app-recycle">
+              <span class="win-icon-glyph">🗑️</span>
+              <span class="win-icon-label">Корзина</span>
+            </div>
+          </div>
+
+          <!-- WINDOW 1: PLAYABLE BEAT SABER VR GAME -->
+          <div class="win-window" id="app-beatsaber">
+            <div class="win-window-titlebar">
+              <div class="win-window-title-left">
+                <span>⚡</span>
+                <span>Beat Saber VR // Реалистичный симулятор (120 FPS)</span>
+              </div>
+              <div class="win-window-controls">
+                <button class="win-control-btn minimize" title="Свернуть">—</button>
+                <button class="win-control-btn maximize" title="Развернуть">▢</button>
+                <button class="win-control-btn close" title="Закрыть">✕</button>
+              </div>
+            </div>
+            <div class="win-window-body">
+              <div class="game-canvas-wrapper">
+                <canvas id="beatsaber-canvas"></canvas>
+              </div>
+              <div class="game-bottom-cta-bar">
+                <div class="game-stats-pill">
+                  Счет: <span id="bs-score-val" style="color:#00f0ff;">0</span> | Комбо: <span id="bs-combo-val" style="color:#ff007f;">0x</span>
+                </div>
+                <button class="btn-game-order open-order-modal">
+                  <span>🛒 Заказать очки для Beat Saber за 57 000 ₽ у Амирхана</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- WINDOW 2: PLAYABLE CYBER TARGET 3D SHOOTER -->
+          <div class="win-window hidden" id="app-target-shooter">
+            <div class="win-window-titlebar">
+              <div class="win-window-title-left">
+                <span>🎯</span>
+                <span>Cyber Target 3D // Интерактивный VR-тир</span>
+              </div>
+              <div class="win-window-controls">
+                <button class="win-control-btn minimize" title="Свернуть">—</button>
+                <button class="win-control-btn maximize" title="Развернуть">▢</button>
+                <button class="win-control-btn close" title="Закрыть">✕</button>
+              </div>
+            </div>
+            <div class="win-window-body">
+              <div class="game-canvas-wrapper">
+                <canvas id="shooter-canvas"></canvas>
+              </div>
+              <div class="game-bottom-cta-bar">
+                <div class="game-stats-pill">
+                  Очки: <span id="ct-score-val" style="color:#ffb703;">0</span> | Время: <span id="ct-timer-val" style="color:#fff;">30s</span>
+                </div>
+                <button class="btn-game-order open-order-modal">
+                  <span>🎯 Заказать шлем с тактильной отдачей (-40%)</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- WINDOW 3: STORE & ORDER WITH -40% DISCOUNT -->
+          <div class="win-window hidden" id="app-store">
+            <div class="win-window-titlebar">
+              <div class="win-window-title-left">
+                <span>🛒</span>
+                <span>NEXUS Store // Оформление заказа со скидкой 40%</span>
+              </div>
+              <div class="win-window-controls">
+                <button class="win-control-btn minimize">—</button>
+                <button class="win-control-btn maximize">▢</button>
+                <button class="win-control-btn close">✕</button>
+              </div>
+            </div>
+            <div class="win-window-body">
+              <div class="win-store-container">
+                <div style="background: rgba(0,240,255,0.08); border: 1px solid var(--cyan-neon); border-radius: 10px; padding: 14px;">
+                  <h4 style="color:#00f0ff; margin-bottom: 4px;">⚡ Акция активирована: Промокод AMIRKHAN применен (-40%)</h4>
+                  <p style="font-size: 0.85rem; color: #a0aec0;">
+                    Ваш заказ поступает напрямую основателю. <strong>Вам лично ответит: Амирхан (+7 777 777 7777)</strong>
+                  </p>
+                </div>
+                <form id="win-order-form" onsubmit="event.preventDefault(); window.proxyShieldInstance.sanitizeInput(''); window.showToast('Заказ принят! Амирхан свяжется с вами в течение 3 минут.', 'success'); document.getElementById('app-store').classList.add('hidden');">
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label style="font-size: 0.82rem; color: #cbd5e1; display: block; margin-bottom: 4px;">Комплектация со скидкой:</label>
+                    <select class="form-input" style="background: #0f1629; color: #fff; width: 100%;">
+                      <option value="pro">NEXUS Pro 120Hz — 57 000 ₽ (Вместо 95 000 ₽) ⭐ ХИТ</option>
+                      <option value="lite">NEXUS Lite 90Hz — 39 000 ₽ (Вместо 65 000 ₽)</option>
+                      <option value="ultimate">NEXUS Ultimate VIP — 78 000 ₽ (Вместо 130 000 ₽)</option>
+                    </select>
+                  </div>
+                  <div class="form-group" style="margin-bottom: 12px;">
+                    <label style="font-size: 0.82rem; color: #cbd5e1; display: block; margin-bottom: 4px;">Ваше имя:</label>
+                    <input type="text" class="form-input" placeholder="Введите ваше имя" required style="width: 100%;">
+                  </div>
+                  <div class="form-group" style="margin-bottom: 14px;">
+                    <label style="font-size: 0.82rem; color: #cbd5e1; display: block; margin-bottom: 4px;">Ваш номер телефона:</label>
+                    <input type="tel" class="form-input" placeholder="+7 777 777 7777" required style="width: 100%;">
+                  </div>
+                  <button type="submit" class="btn-cta" style="width: 100%; justify-content: center; padding: 12px;">
+                    <span>Подтвердить заказ со скидкой 40%</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- WINDOW 4: PROXY GUARD FIREWALL & DEFENSE MONITOR -->
+          <div class="win-window hidden" id="app-proxy-guard">
+            <div class="win-window-titlebar">
+              <div class="win-window-title-left">
+                <span>🛡️</span>
+                <span>Proxy Guard Firewall v4.8 // Система Защиты Сайта</span>
+              </div>
+              <div class="win-window-controls">
+                <button class="win-control-btn minimize">—</button>
+                <button class="win-control-btn maximize">▢</button>
+                <button class="win-control-btn close">✕</button>
+              </div>
+            </div>
+            <div class="win-window-body">
+              <div class="win-proxy-container">
+                <div class="proxy-specs-grid">
+                  <div class="proxy-spec-card">
+                    <span class="spec-label">СТАТУС ПРОКСИ-ТУННЕЛЯ</span>
+                    <span class="spec-val green">● АКТИВЕН (AES-256 GCM)</span>
+                  </div>
+                  <div class="proxy-spec-card">
+                    <span class="spec-label">ЗАЩИТА ОТ ВЗЛОМА & DDOS</span>
+                    <span class="spec-val green">100% ФИЛЬТРАЦИЯ WAF</span>
+                  </div>
+                  <div class="proxy-spec-card">
+                    <span class="spec-label">ПЕРЕХВАЧЕНО АТАК</span>
+                    <span class="spec-val cyan proxy-threat-count">142</span>
+                  </div>
+                  <div class="proxy-spec-card">
+                    <span class="spec-label">МАСКИРОВАНИЕ IP</span>
+                    <span class="spec-val">Cloudflare Ultra Proxy</span>
+                  </div>
+                </div>
+                <div style="background: #040814; border: 1px solid rgba(0,240,255,0.2); border-radius: 8px; padding: 12px; font-family: monospace; font-size: 0.8rem; color: #00f0ff;">
+                  <div>[PROXY-LOG] Secure connection established with upstream node.</div>
+                  <div>[WAF-SHIELD] Anti-DDoS rate-limiter engaged (limit: 15 req/sec).</div>
+                  <div>[HONEYPOT] Bot trapping system initialized. No exploits detected.</div>
+                  <div>[DATA-INTEGRITY] 256-bit SSL encryption verified.</div>
+                </div>
+                <button class="btn-secondary" onclick="window.proxyShieldInstance.testDefense()" style="width: 100%; justify-content: center;">
+                  🧪 Протестировать защиту от хакерских атак
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- WINDOW 5: DIRECT CONTACT WITH AMIRKHAN -->
+          <div class="win-window hidden" id="app-contacts">
+            <div class="win-window-titlebar">
+              <div class="win-window-title-left">
+                <span>📞</span>
+                <span>Связь с Амирханом // Консультант и Основатель</span>
+              </div>
+              <div class="win-window-controls">
+                <button class="win-control-btn minimize">—</button>
+                <button class="win-control-btn maximize">▢</button>
+                <button class="win-control-btn close">✕</button>
+              </div>
+            </div>
+            <div class="win-window-body">
+              <div class="win-contacts-container" style="text-align: center; padding: 10px;">
+                <div class="avatar-ring" style="width: 64px; height: 64px; margin: 0 auto 12px auto;">
+                  <span class="avatar-letter" style="font-size: 1.8rem;">А</span>
+                  <span class="online-indicator" style="width: 16px; height: 16px;"></span>
+                </div>
+                <h3 style="color:#fff; margin-bottom: 4px;">Амирхан</h3>
+                <p style="font-size: 0.85rem; color: #00f0ff; margin-bottom: 12px;">Личный консультант и официальный дистрибьютор NEXUS VR</p>
+                <div style="background: rgba(0,240,255,0.06); border: 1px solid rgba(0,240,255,0.3); border-radius: 12px; padding: 14px; margin-bottom: 16px;">
+                  <span style="font-size: 0.8rem; color: #94a3b8; display: block;">Прямой номер телефона:</span>
+                  <a href="tel:+77777777777" style="font-family: monospace; font-size: 1.6rem; font-weight: 800; color: #00f0ff; text-decoration: none;">+7 777 777 7777</a>
+                  <span style="font-size: 0.82rem; color: #10b981; display: block; margin-top: 4px;">● Вам ответит: Амирхан</span>
+                </div>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                  <a href="tel:+77777777777" class="btn-cta" style="padding: 10px 20px;">Позвонить</a>
+                  <a href="https://wa.me/77777777777" target="_blank" class="contact-badge-btn wa" style="padding: 10px 20px; font-size: 0.9rem;">WhatsApp</a>
+                  <a href="https://t.me/+77777777777" target="_blank" class="contact-badge-btn tg" style="padding: 10px 20px; font-size: 0.9rem;">Telegram</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- WINDOW 6: 3D GLASSES & GUIDE -->
+          <div class="win-window hidden" id="app-glasses-guide">
+            <div class="win-window-titlebar">
+              <div class="win-window-title-left">
+                <span>🥽</span>
+                <span>Презентация: Как выглядят 3D очки и зачем они нужны</span>
+              </div>
+              <div class="win-window-controls">
+                <button class="win-control-btn minimize">—</button>
+                <button class="win-control-btn maximize">▢</button>
+                <button class="win-control-btn close">✕</button>
+              </div>
+            </div>
+            <div class="win-window-body">
+              <p style="color: #cbd5e1; font-size: 0.9rem; line-height: 1.6; margin-bottom: 12px;">
+                VR-очки NEXUS оснащены сверхтонкими линзами Pancake, двойными экранами 4K Micro-OLED с частотой 120 Гц и отслеживанием рук. Они позволяют полностью заменить громоздкие мониторы и погружают в игры SteamVR с реалистичной физикой.
+              </p>
+              <a href="#studio" class="btn-hero-glasses-guide" style="padding: 12px 18px;" onclick="document.getElementById('app-glasses-guide').classList.add('hidden')">
+                <span class="btn-guide-icon">🔍</span>
+                <span class="btn-guide-text">
+                  <span class="main-label">Открыть 3D Инспектор Очков</span>
+                  <span class="sub-label">Вращайте шлем на 360° в реальном времени</span>
+                </span>
+                <span class="btn-guide-arrow">➜</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- WINDOW 7: RECYCLE BIN -->
+          <div class="win-window hidden" id="app-recycle">
+            <div class="win-window-titlebar">
+              <div class="win-window-title-left">
+                <span>🗑️</span>
+                <span>Корзина</span>
+              </div>
+              <div class="win-window-controls">
+                <button class="win-control-btn close">✕</button>
+              </div>
+            </div>
+            <div class="win-window-body" style="text-align: center; padding: 30px;">
+              <span style="font-size: 3rem;">🗑️</span>
+              <h4 style="color:#fff; margin-top: 10px;">Корзина пуста!</h4>
+              <p style="color: #94a3b8; font-size: 0.88rem; margin-top: 6px;">
+                Все сомнения удалены. Пора заказывать VR-очки со скидкой 40% у Амирхана!
+              </p>
+            </div>
+          </div>
+
+          <!-- Windows 11 Taskbar -->
+          <div class="win-taskbar">
+            <!-- Center Start & Apps Area -->
+            <div class="win-taskbar-center">
+              <button class="win-start-btn" id="win-start-btn" title="Пуск">
+                <div class="win-start-logo">
+                  <span></span><span></span>
+                  <span></span><span></span>
+                </div>
+              </button>
+              <div class="win-taskbar-apps" id="win-taskbar-apps">
+                <!-- Dynamically populated open app buttons -->
+              </div>
+            </div>
+
+            <!-- System Tray Area -->
+            <div class="win-tray">
+              <button class="win-tray-icon" id="win-tray-shield" title="Proxy Guard WAF: 100% Защита">🛡️</button>
+              <button class="win-tray-icon" title="Wi-Fi 7 Подключено (6.8ms latency)">📶</button>
+              <button class="win-tray-icon" id="win-tray-sound" title="Звук интерфейса">🔊</button>
+              <div class="win-tray-time">
+                <span id="win-taskbar-time">16:45:00</span>
+                <span id="win-taskbar-date">17.11.2026</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Windows 11 Start Menu Popup -->
+          <div id="win-start-menu">
+            <input type="text" class="win-start-search" placeholder="Поиск в Windows и играх...">
+            <div class="win-start-section-title">Закрепленные приложения</div>
+            <div class="win-start-grid">
+              <div class="win-start-item" data-app="app-beatsaber">
+                <span>⚡</span>
+                <span>Beat Saber VR</span>
+              </div>
+              <div class="win-start-item" data-app="app-target-shooter">
+                <span>🎯</span>
+                <span>Cyber Target 3D</span>
+              </div>
+              <div class="win-start-item" data-app="app-store">
+                <span>🛒</span>
+                <span>Магазин (-40%)</span>
+              </div>
+              <div class="win-start-item" data-app="app-glasses-guide">
+                <span>🥽</span>
+                <span>3D Очки & Гид</span>
+              </div>
+              <div class="win-start-item" data-app="app-proxy-guard">
+                <span>🛡️</span>
+                <span>Proxy Guard</span>
+              </div>
+              <div class="win-start-item" data-app="app-contacts">
+                <span>📞</span>
+                <span>Связь с Амирханом</span>
+              </div>
+            </div>
+
+            <div class="win-start-footer">
+              <div class="win-start-user">
+                <div class="win-user-avatar">А</div>
+                <div class="win-user-info">
+                  <span class="win-user-name">Амирхан</span>
+                  <span class="win-user-role">+7 777 777 7777 (Консультант)</span>
+                </div>
+              </div>
+              <button class="win-control-btn" onclick="document.getElementById('win-start-menu').classList.remove('active'); window.showToast('Симулятор рабочего стола Windows готов к работе!', 'success');" title="Перезагрузить рабочий стол">
+                ⚡
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- =========================================================================
+             B. 3D VR ВЗГЛЯД ИЗНУТРИ ШЛЕМА (360° Арена, скрыта при выборе Windows)
+             ========================================================================= -->
+        <div class="sim-container expanded" id="vr-360-container" style="display: none; margin-top: 20px;">
+          <!-- Gaming & Simulator Action Header Bar -->
+          <div class="sim-toolbar">
+            <!-- Wear VR Headset Action Button -->
+            <button id="btn-wear-vr" class="btn-wear-vr">
+              <span class="btn-wear-icon">🥽</span>
+              <span>НАДЕТЬ VR-ОЧКИ И ВОЙТИ В ИГРУ</span>
+            </button>
+
+            <!-- Waypoint Locomotion Buttons -->
+            <div class="sim-waypoints-bar">
+              <span class="waypoints-label">Локации:</span>
+              <div class="pill-btn-group">
+                <button class="sim-waypoint-btn active" data-waypoint="arena">📍 Главная Арена</button>
+                <button class="sim-waypoint-btn" data-waypoint="desktop">🖥️ Рабочий Стол ПК</button>
+                <button class="sim-waypoint-btn" data-waypoint="tower">🏙️ Смотровая Башня</button>
+                <button class="sim-waypoint-btn" data-waypoint="bridge">🌉 Неоновый Мост</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Expanded 3D Viewport with Live Headset & First-Person World -->
+          <div id="sim-viewport">
+            <canvas id="sim-canvas"></canvas>
+
+            <!-- Cinematic Lens Mask & Peripheral Vignette (Activates when worn) -->
+            <div class="sim-vr-mask"></div>
+
+            <!-- In-Game 3D Telemetry HUD Overlay -->
+            <div class="sim-hud-overlay">
+              <div class="sim-hud-top">
+                <div class="sim-hud-badge-group">
+                  <span class="badge-pulse-dot"></span>
+                  <span class="sim-hud-title" id="waypoint-badge">РЕЖИМ: ГЛАВНАЯ АРЕНА (120 FPS)</span>
+                </div>
+                <div class="sim-hud-telemetry">
+                  <span>120 FPS // ULTRA-SMOOTH</span>
+                  <span>LATENCY: 6.8ms (Wi-Fi 7)</span>
+                </div>
+              </div>
+
+              <div class="sim-hud-center"></div>
+
+              <div class="sim-hud-bottom">
+                <span id="waypoint-explanation">
+                  Плавное скольжение без задержек. Угол обзора 110° и частота 120 Гц исключают укачивание.
+                </span>
+                <span class="hud-tech-tag">[ 6DoF MOTION TRACKING // PC VR STREAM ]</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 5. ПРЯМАЯ СВЯЗЬ И ОФИЦИАЛЬНАЯ ГАРАНТИЯ (АМИРХАН & PROXY SHIELD) -->
+    <section class="section" id="contacts">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">ОФИЦИАЛЬНЫЕ КОНТАКТЫ // ГАРАНТИЯ</span>
+          <h2 class="section-title">Прямая связь с Амирханом и Защита Сайта</h2>
+          <p class="section-subtitle">
+            Мы работаем прозрачно и без посредников. Каждый заказ курируется лично, а сайт и платежные данные защищены сертифицированным прокси-файрволом.
+          </p>
+        </div>
+
+        <div class="contacts-grid">
+          <!-- Card 1: Amirkhan Personal Contacts -->
+          <div class="contact-card-main">
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+              <div class="avatar-ring" style="width: 58px; height: 58px;">
+                <span class="avatar-letter" style="font-size: 1.6rem;">А</span>
+                <span class="online-indicator" style="width: 14px; height: 14px;"></span>
+              </div>
+              <div>
+                <h3 style="color:#fff; font-size: 1.3rem;">Амирхан</h3>
+                <span style="color: var(--cyan-neon); font-size: 0.88rem; font-weight: 600;">Основатель и ведущий VR-эксперт NEXUS</span>
+              </div>
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+              «Здравствуйте! Если у вас есть вопросы по подключению к компьютеру, совместимости с играми или настройке шлема — позвоните мне по номеру <strong>+7 777 777 7777</strong>. Я лично отвечу на звонок, помогу выбрать оптимальную комплектацию со скидкой 40% и оформлю бесплатный тест-драйв!»
+            </p>
+
+            <div style="background: rgba(0,240,255,0.06); border: 1px solid rgba(0,240,255,0.25); border-radius: 14px; padding: 18px; margin-bottom: 20px;">
+              <div style="font-size: 0.82rem; color: #94a3b8;">Прямой номер для связи:</div>
+              <a href="tel:+77777777777" style="font-family: monospace; font-size: 1.7rem; font-weight: 800; color: #00f0ff; text-decoration: none; display: block; margin: 4px 0;">+7 777 777 7777</a>
+              <div style="font-size: 0.85rem; color: #10b981; font-weight: 600;">● Вам ответит: Амирхан (Звонок бесплатный)</div>
+            </div>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <a href="tel:+77777777777" class="btn-cta" style="padding: 12px 24px;">
+                <span>Позвонить Амирхану</span>
+              </a>
+              <a href="https://wa.me/77777777777" target="_blank" class="contact-badge-btn wa" style="padding: 12px 20px; font-size: 0.95rem; display: inline-flex; align-items: center;">
+                WhatsApp
+              </a>
+              <a href="https://t.me/+77777777777" target="_blank" class="contact-badge-btn tg" style="padding: 12px 20px; font-size: 0.95rem; display: inline-flex; align-items: center;">
+                Telegram
+              </a>
+            </div>
+          </div>
+
+          <!-- Card 2: Proxy Shield & Security Guarantee -->
+          <div class="security-card-main">
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+              <div style="width: 58px; height: 58px; border-radius: 50%; background: rgba(16,185,129,0.15); border: 2px solid #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.8rem;">
+                🛡️
+              </div>
+              <div>
+                <h3 style="color:#fff; font-size: 1.3rem;">Proxy Shield Cyber Defense</h3>
+                <span style="color: #10b981; font-size: 0.88rem; font-weight: 600;">100% Защита от взлома и атак</span>
+              </div>
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px;">
+              Ваша безопасность — наш главный приоритет. Сайт защищен изолированным прокси-туннелем и многоуровневым файрволом WAF, исключающим перехват заказов, утечку данных и хакерские атаки.
+            </p>
+
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; color: #cbd5e1; font-size: 0.9rem;">
+              <li style="display: flex; align-items: center; gap: 10px;">
+                <span style="color:#10b981; font-size: 1.1rem;">✓</span>
+                <span><strong>Прокси-маскирование IP:</strong> Полная защита серверов от DDoS-атак до 1.5 Тбит/с</span>
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px;">
+                <span style="color:#10b981; font-size: 1.1rem;">✓</span>
+                <span><strong>WAF Фильтрация:</strong> Блокировка SQL-инъекций, XSS скриптов и вредоносных ботов</span>
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px;">
+                <span style="color:#10b981; font-size: 1.1rem;">✓</span>
+                <span><strong>Шифрование TLS 1.3 / AES-256:</strong> Данные передаются в закрытом зашифрованном виде</span>
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px;">
+                <span style="color:#10b981; font-size: 1.1rem;">✓</span>
+                <span><strong>Гарантия безопасности сделки:</strong> 14 дней на возврат и 2 года сервиса</span>
+              </li>
+            </ul>
+
+            <button class="btn-secondary" onclick="window.proxyShieldInstance.openSecurityModal()" style="width: 100%; justify-content: center; padding: 12px;">
+              <span>Открыть Центр Безопасности Proxy Shield</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. APPLICATION FIELDS -->
+    <section class="section" id="applications">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">СФЕРЫ ПРИМЕНЕНИЯ</span>
+          <h2 class="section-title">Где используются VR-очки</h2>
+          <p class="section-subtitle">
+            Виртуальная реальность трансформирует ключевые отрасли человечества.
+          </p>
+        </div>
+
+        <div class="apps-grid">
+          <div class="app-card">
+            <span class="app-card-badge">ENTERTAINMENT</span>
+            <h3>Гейминг и Киберспорт</h3>
+            <p>
+              Полное физическое присутствие в виртуальных мирах. Вы целитесь собственными руками, уворачиваетесь от выстрелов телом и исследуете миры с фотореалистичной графикой.
+            </p>
+            <ul class="app-features-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Поддержка SteamVR, OpenXR, Unreal Engine 5</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Тактильная отдача высокой четкости</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="app-card">
+            <span class="app-card-badge">MEDICINE & SCIENCE</span>
+            <h3>Медицина и Хирургия</h3>
+            <p>
+              Хирурги отрабатывают сложнейшие операции на точных 3D-моделях органов пациентов перед реальным вмешательством, минимизируя риски до нуля.
+            </p>
+            <ul class="app-features-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Субмиллиметровая точность отслеживания пальцев</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Анатомические симуляции в масштабе 1:1</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="app-card">
+            <span class="app-card-badge">ARCHITECTURE & CAD</span>
+            <h3>Архитектура и Дизайн</h3>
+            <p>
+              Архитекторы и заказчики могут войти внутрь здания еще до начала строительных работ, оценить естественное освещение, эргономику и материалы.
+            </p>
+            <ul class="app-features-list">
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Интеграция с Revit, Blender, AutoCAD</span>
+              </li>
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>Совместные виртуальные презентации команд</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. TECHNICAL SPECIFICATIONS -->
+    <section class="section" id="specs">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">СПЕЦИФИКАЦИЯ</span>
+          <h2 class="section-title">Технические характеристики</h2>
+          <p class="section-subtitle">
+            Флагманское аппаратное обеспечение, спроектированное для максимального комфорта и производительности.
+          </p>
+        </div>
+
+        <div class="specs-table-wrapper">
+          <div class="specs-grid">
+            <div class="spec-category">
+              <h3 class="spec-cat-title">Оптика и Дисплей</h3>
+              <div class="spec-item">
+                <span class="spec-name">Тип дисплея</span>
+                <span class="spec-val">Dual Micro-OLED 4K</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-name">Разрешение</span>
+                <span class="spec-val">3840 × 3550 на каждый глаз</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-name">Частота обновления</span>
+                <span class="spec-val">90 / 120 Гц с адаптивным VRR</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-name">Угол обзора (FOV)</span>
+                <span class="spec-val">110° диагональный</span>
+              </div>
+            </div>
+
+            <div class="spec-category">
+              <h3 class="spec-cat-title">Трекинг и Сенсоры</h3>
+              <div class="spec-item">
+                <span class="spec-name">Тип трекинга</span>
+                <span class="spec-val">Внутренний 6DoF (Inside-Out)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-name">Оптические камеры</span>
+                <span class="spec-val">4 широкоугольные + 2 RGB Pass-through</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-name">Глубинный сенсор</span>
+                <span class="spec-val">Solid-State LiDAR Scanner</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-name">Отслеживание взгляда</span>
+                <span class="spec-val">Eye Tracking для фовеального рендеринга</span>
+              </div>
+            </div>
+
+            <div class="spec-category">
+              <h3 class="spec-cat-title">Эргономика и Питание</h3>
+              <div class="spec-item">
+                <span class="spec-name">Масса шлема</span>
+                <span class="spec-val">385 грамм (сбалансированный вес)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-name">Время работы</span>
+                <span class="spec-val">До 3.5 часов (встроенный + внешний акб)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-name">Аудиосистема</span>
+                <span class="spec-val">Spatial 3D Audio + 4 микрофона</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-name">Подключение</span>
+                <span class="spec-val">Wi-Fi 7, Bluetooth 5.4, USB-C 40Gbps</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. INTERACTIVE FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">ВОПРОСЫ И ОТВЕТЫ</span>
+          <h2 class="section-title">Часто задаваемые вопросы</h2>
+          <p class="section-subtitle">
+            Все, что нужно знать перед покупкой и погружением в виртуальную реальность.
+          </p>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item active">
+            <button class="faq-question">
+              <span>Будет ли кружиться голова в VR-очках?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              В шлемах нового поколения проблема укачивания сведена к минимуму благодаря сверхнизкой задержке отклика (менее 12 мс) и высокой частоте обновления 120 Гц. Картинка обновляется синхронно с движениями вашей головы без малейшего запаздывания.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Как оформить заказ со скидкой 40% и кто мне ответит?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Оформить заказ можно прямо на сайте или позвонив по номеру <strong>+7 777 777 7777</strong>. Вам лично ответит консультант <strong>Амирхан</strong>, зафиксирует скидку 40%, уточнит адрес доставки и подробно расскажет о настройке шлема.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Защищены ли мои данные и сайт от взлома?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              Да, на сайте активирована защитная прокси-система Proxy Shield и файрвол WAF с маскированием IP-адреса, шифрованием AES-256 и защитой от DDoS-атак. Все заявки и транзакции на 100% конфиденциальны и изолированы от хакерских угроз.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Нужен ли мощный компьютер для работы?</span>
+              <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <div class="faq-answer">
+              VR-очки являются гибридными: они работают автономно благодаря встроенному чипсету, а также могут подключаться к ПК через Wi-Fi 7 или оптический кабель USB-C для запуска требовательных AAA-игр (SteamVR) и профессиональных CAD-приложений.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CALL TO ACTION BANNER -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-banner-wrapper">
+          <h2>Готовы прикоснуться к будущему?</h2>
+          <p>
+            Запишитесь на бесплатный тест-драйв у Амирхана или оформите предзаказ со скидкой 40% по номеру +7 777 777 7777.
+          </p>
+          <button class="btn-cta open-order-modal" style="font-size: 1.1rem; padding: 14px 36px;">
+            <span>Заказать со скидкой 40%</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="#" class="brand-logo">
+              <div class="logo-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M2 10s3-4 10-4 10 4 10 4-1 6-4 7-6-1-6-1-3 2-6 1-4-7-4-7z"></path>
+                  <circle cx="7" cy="11" r="2"></circle>
+                  <circle cx="17" cy="11" r="2"></circle>
+                </svg>
+              </div>
+              <span>NEXUS<span class="brand-highlight">VR</span></span>
+            </a>
+            <p>
+              Лидер в сфере разработки аппаратных решений виртуальной реальности. Личный консультант: <strong>Амирхан</strong>.
+            </p>
+            <div style="margin-top: 14px; display: inline-flex; align-items: center; gap: 8px; background: rgba(16,185,129,0.1); border: 1px solid #10b981; padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; color: #10b981;">
+              <span>🛡️</span>
+              <span>Proxy Shield: Сайт защищен от взлома</span>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Цены и Комплектации</h4>
+            <ul class="footer-links">
+              <li><a href="#about">NEXUS Lite (39 000 ₽)</a></li>
+              <li><a href="#about">NEXUS Pro 120Hz (57 000 ₽) ⭐</a></li>
+              <li><a href="#about">NEXUS Ultimate VIP (78 000 ₽)</a></li>
+              <li><a href="#studio">3D Модель очков</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Возможности</h4>
+            <ul class="footer-links">
+              <li><a href="#why-vr">Зачем нужны 3D очки</a></li>
+              <li><a href="#simulator">Рабочий стол Windows 11</a></li>
+              <li><a href="#simulator">Beat Saber VR & Тир</a></li>
+              <li><a href="#specs">Спецификация 4K Micro-OLED</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Контакты Амирхана</h4>
+            <ul class="footer-links">
+              <li><a href="tel:+77777777777" style="color:#00f0ff; font-weight: 700; font-family: monospace;">+7 777 777 7777</a></li>
+              <li><span style="color: #94a3b8;">Вам ответит: <strong>Амирхан</strong></span></li>
+              <li><a href="https://wa.me/77777777777" target="_blank">Написать в WhatsApp</a></li>
+              <li><a href="https://t.me/+77777777777" target="_blank">Написать в Telegram</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <span>&copy; 2026 NEXUS VR Inc. Официальный дистрибьютор: Амирхан (+7 777 777 7777).</span>
+          <span>Защищено Proxy Shield WAF. Разработано на Three.js и WebGL.</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Test Drive / Pre-Order Modal Window -->
+  <div class="modal-overlay" id="order-modal">
+    <div class="modal-content">
+      <button class="modal-close-btn" id="close-modal-btn" aria-label="Закрыть модальное окно">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+        <span style="background: rgba(255,0,127,0.2); border: 1px solid #ff007f; color: #ff007f; font-size: 0.75rem; font-weight: 800; padding: 2px 8px; border-radius: 6px;">СКИДКА -40%</span>
+        <span style="font-size: 0.8rem; color: #10b981; font-weight: 600;">● Вам ответит: Амирхан</span>
+      </div>
+
+      <h3 class="modal-title">Заказ VR-очков со скидкой 40%</h3>
+      <p class="modal-desc">
+        Заполните форму, и <strong>Амирхан лично свяжется с вами по номеру +7 777 777 7777</strong> для подтверждения заказа или записи на тест-драйв.
+      </p>
+
+      <form id="order-form">
+        <div class="form-group">
+          <label for="order-plan-select">Комплектация со скидкой:</label>
+          <select id="order-plan-select" class="form-input" style="background: #0f1629; color: #fff;">
+            <option value="Pro">NEXUS Pro Edition 120Hz — 57 000 ₽ (-40% скидка) ⭐ ХИТ</option>
+            <option value="Lite">NEXUS Lite Edition 90Hz — 39 000 ₽ (-40% скидка)</option>
+            <option value="Ultimate">NEXUS Ultimate VIP Pack — 78 000 ₽ (-40% скидка)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="user-name">Ваше имя:</label>
+          <input type="text" id="user-name" class="form-input" placeholder="Введите имя" required>
+        </div>
+
+        <div class="form-group">
+          <label for="user-phone">Телефон или Telegram:</label>
+          <input type="text" id="user-phone" class="form-input" placeholder="+7 (999) 000-00-00" required>
+        </div>
+
+        <div class="form-group">
+          <label for="user-color">Желаемый цвет шлема:</label>
+          <select id="user-color" class="form-input" style="background: #0f1629; color: #fff;">
+            <option value="obsidian">Cosmic Obsidian (Глубокий черный с кибер-подсветкой)</option>
+            <option value="glacier">Glacier Pure (Керамический белый)</option>
+            <option value="cyber">Cyber Neon (Неоновый киберпанк)</option>
+            <option value="titanium">Titanium Gold (Титан с золотом)</option>
+          </select>
+        </div>
+
+        <div style="font-size: 0.75rem; color: #10b981; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
+          <span>🛡️</span>
+          <span>Форма защищена Proxy Shield WAF от перехвата и спама</span>
+        </div>
+
+        <button type="submit" class="btn-cta" style="width: 100%; justify-content: center; padding: 14px;">
+          <span>Подтвердить заказ со скидкой</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts: Local Three.js with CDN Fallback -->
+  <script src="libs/three.min.js"></script>
+  <script src="libs/OrbitControls.js"></script>
+  <script src="libs/gsap.min.js"></script>
+
+  <!-- Application Modules -->
+  <script src="js/audio.js"></script>
+  <script src="js/proxy-shield.js"></script>
+  <script src="js/headset-model.js"></script>
+  <script src="js/background-scene.js"></script>
+  <script src="js/interactive-studio.js"></script>
+  <script src="js/vr-simulator.js"></script>
+  <script src="js/windows-desktop.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
