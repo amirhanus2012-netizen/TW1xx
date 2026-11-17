@@ -190,93 +190,468 @@ class VRSimulator {
     }
   }
 
-  // 3 Floating 4K Curved Screens representing the PC Virtual Desktop
+  // 3 Floating 4K Curved Screens representing the Authentic Windows 11 PC Desktop
   buildVirtualPCDesktop() {
+    // Canvas roundRect Polyfill for all browsers
+    if (!CanvasRenderingContext2D.prototype.roundRect) {
+      CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r = 0) {
+        let radii = typeof r === 'number' ? [r, r, r, r] : (Array.isArray(r) ? r : [0, 0, 0, 0]);
+        while (radii.length < 4) radii.push(radii[0] || 0);
+        const [tl, tr, br, bl] = radii;
+        this.moveTo(x + tl, y);
+        this.lineTo(x + w - tr, y);
+        this.quadraticCurveTo(x + w, y, x + w, y + tr);
+        this.lineTo(x + w, y + h - br);
+        this.quadraticCurveTo(x + w, y + h, x + w - br, y + h);
+        this.lineTo(x + bl, y + h);
+        this.quadraticCurveTo(x, y + h, x, y + h - bl);
+        this.lineTo(x, y + tl);
+        this.quadraticCurveTo(x, y, x + tl, y);
+        return this;
+      };
+    }
+
     const desktopGroup = new THREE.Group();
     desktopGroup.name = 'Virtual_PC_Desktop_Cluster';
     desktopGroup.position.set(0, 1.2, -14);
 
     const screenAngles = [-0.35, 0, 0.35];
-    const screenTexts = [
-      '🖥️ МОНИТОР 1: STEAMVR // CYBERPUNK 2077 VR [120 FPS]',
-      '💻 МОНИТОР 2: РАБОЧИЙ СТОЛ WINDOWS // 4K DESKTOP STREAM',
-      '📊 МОНИТОР 3: VISUAL STUDIO CODE // TELEMETRY & CHAT'
-    ];
+
+    // Helper: Draw authentic Windows 11 Bloom Wallpaper
+    const drawWin11Wallpaper = (ctx, w, h) => {
+      const grad = ctx.createRadialGradient(w * 0.5, h * 0.45, 80, w * 0.5, h * 0.5, w * 0.7);
+      grad.addColorStop(0, '#1a3668');
+      grad.addColorStop(0.35, '#0e2044');
+      grad.addColorStop(0.75, '#081126');
+      grad.addColorStop(1, '#040714');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Windows 11 Bloom central flower petals
+      ctx.save();
+      ctx.translate(w * 0.5, h * 0.46);
+      ctx.shadowColor = '#00f0ff';
+      ctx.shadowBlur = 45;
+
+      const petalColors = [
+        'rgba(0, 210, 255, 0.65)',
+        'rgba(0, 112, 243, 0.75)',
+        'rgba(121, 40, 202, 0.55)',
+        'rgba(0, 240, 255, 0.45)'
+      ];
+
+      for (let p = 0; p < 8; p++) {
+        ctx.rotate((Math.PI * 2) / 8);
+        ctx.fillStyle = petalColors[p % petalColors.length];
+        ctx.beginPath();
+        ctx.ellipse(0, -90, 75, 150, Math.PI / 12, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Inner glowing core of the bloom
+      const coreGrad = ctx.createRadialGradient(0, 0, 10, 0, 0, 90);
+      coreGrad.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
+      coreGrad.addColorStop(0.4, 'rgba(0, 240, 255, 0.6)');
+      coreGrad.addColorStop(1, 'rgba(0, 112, 243, 0)');
+      ctx.fillStyle = coreGrad;
+      ctx.beginPath();
+      ctx.arc(0, 0, 90, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    };
+
+    // Helper: Draw Windows 11 Taskbar
+    const drawWin11Taskbar = (ctx, w, h, activeTitle = 'SteamVR') => {
+      const barH = 68;
+      const barY = h - barH;
+
+      // Translucent Acrylic Taskbar
+      ctx.fillStyle = 'rgba(12, 18, 34, 0.92)';
+      ctx.fillRect(0, barY, w, barH);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(0, barY);
+      ctx.lineTo(w, barY);
+      ctx.stroke();
+
+      // Centered Icons (Windows 11 Layout)
+      const centerX = w * 0.5;
+      const startX = centerX - 180;
+
+      // 1. Windows Start Logo (4 Blue Squares)
+      ctx.fillStyle = '#00a4ef';
+      const logoSize = 10;
+      const gap = 3;
+      const lw = startX;
+      const lh = barY + 24;
+      ctx.fillRect(lw, lh, logoSize, logoSize);
+      ctx.fillRect(lw + logoSize + gap, lh, logoSize, logoSize);
+      ctx.fillRect(lw, lh + logoSize + gap, logoSize, logoSize);
+      ctx.fillRect(lw + logoSize + gap, lh + logoSize + gap, logoSize, logoSize);
+
+      // 2. Search Pill
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.beginPath();
+      ctx.roundRect(startX + 40, barY + 16, 110, 36, 18);
+      ctx.fill();
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '14px sans-serif';
+      ctx.fillText('⌕  Поиск', startX + 58, barY + 39);
+
+      // 3. Taskbar Apps (Explorer, Edge, SteamVR, Discord, Store)
+      const apps = [
+        { icon: '📁', name: 'Explorer', active: false },
+        { icon: '🌐', name: 'Edge', active: false },
+        { icon: '🎮', name: 'SteamVR', active: true },
+        { icon: '💬', name: 'Discord', active: false },
+        { icon: '🛒', name: 'Store', active: false }
+      ];
+
+      apps.forEach((app, i) => {
+        const appX = startX + 170 + i * 46;
+        if (app.active) {
+          ctx.fillStyle = 'rgba(0, 240, 255, 0.15)';
+          ctx.beginPath();
+          ctx.roundRect(appX - 8, barY + 14, 40, 40, 8);
+          ctx.fill();
+
+          // Active indicator pill
+          ctx.fillStyle = '#00f0ff';
+          ctx.beginPath();
+          ctx.roundRect(appX + 2, barY + 60, 20, 3, 2);
+          ctx.fill();
+        }
+
+        ctx.font = '22px sans-serif';
+        ctx.fillText(app.icon, appX, barY + 41);
+      });
+
+      // System Tray (Right Side)
+      const trayX = w - 340;
+      ctx.fillStyle = '#10b981';
+      ctx.font = 'bold 14px monospace';
+      ctx.fillText('🛡️ PROXY SHIELD: OK', trayX, barY + 40);
+
+      ctx.font = '16px sans-serif';
+      ctx.fillText('📶  🔊  🔋', trayX + 180, barY + 40);
+
+      // Clock & Date
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 14px monospace';
+      ctx.fillText('17:20', w - 85, barY + 32);
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '12px monospace';
+      ctx.fillText('17.11.2026', w - 85, barY + 52);
+    };
+
+    // Helper: Draw Desktop Icons Column on Left
+    const drawDesktopIcons = (ctx) => {
+      const icons = [
+        { glyph: '🖥️', label: 'Этот компьютер' },
+        { glyph: '📁', label: 'Документы VR' },
+        { glyph: '🎮', label: 'SteamVR.exe' },
+        { glyph: '⚡', label: 'Beat Saber VR' },
+        { glyph: '🎯', label: 'Half-Life: Alyx' },
+        { glyph: '🛒', label: 'Магазин VR (-20%)' },
+        { glyph: '📞', label: 'Амирхан (+7 777)' },
+        { glyph: '🗑️', label: 'Корзина' }
+      ];
+
+      icons.forEach((ic, i) => {
+        const x = 32;
+        const y = 30 + i * 82;
+
+        ctx.font = '32px sans-serif';
+        ctx.fillText(ic.glyph, x + 16, y + 36);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = '12px sans-serif';
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.9)';
+        ctx.shadowBlur = 6;
+        ctx.fillText(ic.label, x, y + 62);
+        ctx.shadowBlur = 0;
+      });
+    };
+
+    // Helper: Draw Windows 11 App Window Frame
+    const drawWindowFrame = (ctx, x, y, width, height, title, icon = '💻') => {
+      // Window Background with subtle shadow
+      ctx.save();
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
+      ctx.shadowBlur = 35;
+      ctx.fillStyle = 'rgba(14, 20, 38, 0.95)';
+      ctx.beginPath();
+      ctx.roundRect(x, y, width, height, 12);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.strokeStyle = 'rgba(0, 240, 255, 0.35)';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect(x, y, width, height, 12);
+      ctx.stroke();
+
+      // Titlebar
+      ctx.fillStyle = 'rgba(8, 12, 24, 0.95)';
+      ctx.beginPath();
+      ctx.roundRect(x, y, width, 44, [12, 12, 0, 0]);
+      ctx.fill();
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.beginPath();
+      ctx.moveTo(x, y + 44);
+      ctx.lineTo(x + width, y + 44);
+      ctx.stroke();
+
+      // Title text
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 15px sans-serif';
+      ctx.fillText(`${icon}  ${title}`, x + 16, y + 28);
+
+      // Window Control Buttons (— ▢ ✕)
+      const ctrlX = x + width - 110;
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '16px monospace';
+      ctx.fillText('—', ctrlX, y + 28);
+      ctx.fillText('▢', ctrlX + 35, y + 28);
+      ctx.fillStyle = '#ff4d4f';
+      ctx.fillText('✕', ctrlX + 70, y + 28);
+    };
 
     screenAngles.forEach((ang, idx) => {
-      // Screen Canvas Texture
+      // High-resolution Screen Canvas (1600 x 900)
       const sCanvas = document.createElement('canvas');
-      sCanvas.width = 1024;
-      sCanvas.height = 576;
+      sCanvas.width = 1600;
+      sCanvas.height = 900;
       const ctx = sCanvas.getContext('2d');
 
-      // Wallpaper
-      const grad = ctx.createLinearGradient(0, 0, 1024, 576);
-      grad.addColorStop(0, '#060a1a');
-      grad.addColorStop(0.5, '#0b1633');
-      grad.addColorStop(1, '#110c24');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 1024, 576);
+      // 1. Draw Windows 11 Wallpaper
+      drawWin11Wallpaper(ctx, 1600, 900);
 
-      // Cyber Grid
-      ctx.strokeStyle = 'rgba(0, 240, 255, 0.25)';
-      ctx.lineWidth = 2;
-      for (let x = 0; x < 1024; x += 48) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 576); ctx.stroke();
-      }
-      for (let y = 0; y < 576; y += 48) {
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(1024, y); ctx.stroke();
-      }
+      // 2. Draw Desktop Icons
+      drawDesktopIcons(ctx);
 
-      // Window Header Bar
-      ctx.fillStyle = 'rgba(0, 240, 255, 0.15)';
-      ctx.fillRect(0, 0, 1024, 60);
-      ctx.fillStyle = '#00f0ff';
-      ctx.font = 'bold 22px monospace';
-      ctx.fillText(screenTexts[idx], 30, 40);
+      // 3. Draw Windows Application Windows based on monitor
+      if (idx === 1) {
+        // =====================================================================
+        // CENTER MONITOR: MAIN WINDOWS 11 DESKTOP WITH STEAMVR LAUNCHER
+        // =====================================================================
+        drawWindowFrame(ctx, 230, 70, 1280, 720, 'SteamVR 2026 // Half-Life: Alyx & Beat Saber [120 FPS]', '🎮');
 
-      // Content Box
-      ctx.strokeStyle = '#00f0ff';
-      ctx.lineWidth = 3;
-      ctx.strokeRect(30, 80, 964, 460);
+        // Status Bar inside Window
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.1)';
+        ctx.beginPath();
+        ctx.roundRect(260, 130, 1220, 50, 8);
+        ctx.fill();
+        ctx.fillStyle = '#10b981';
+        ctx.font = 'bold 16px monospace';
+        ctx.fillText('● ГОТОВО К ИГРЕ // ШЛЕМ ПОДКЛЮЧЕН ПО WI-FI 7 // 120 FPS ULTRA-SMOOTH', 285, 162);
+        ctx.fillStyle = '#00f0ff';
+        ctx.fillText('ЗАДЕРЖКА: 6.8 МС  |  КОДЕК: AV1 500 МБИТ/С', 1040, 162);
 
-      if (idx === 0) {
-        // Game Monitor
+        // Featured Game Card 1: Half-Life Alyx
+        ctx.fillStyle = 'rgba(6, 12, 28, 0.9)';
+        ctx.beginPath();
+        ctx.roundRect(260, 200, 595, 380, 12);
+        ctx.fill();
+        ctx.strokeStyle = '#00f0ff';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
         ctx.fillStyle = '#ff007f';
-        ctx.font = 'bold 36px monospace';
-        ctx.fillText('▶ HALF-LIFE: ALYX // RUNNING', 60, 160);
-        ctx.fillStyle = '#f0f4fc';
-        ctx.font = '22px monospace';
-        ctx.fillText('• Разрешение: 3840x3550 per eye @ 120Hz', 60, 230);
-        ctx.fillText('• Задержка стриминга с ПК: 6.8 мс (Wi-Fi 7)', 60, 280);
-        ctx.fillText('• Битрейт кодека AV1: 500 Мбит/с без потерь', 60, 330);
-        ctx.fillText('• 6DoF отслеживание рук и контроллеров', 60, 380);
-      } else if (idx === 1) {
-        // Main Desktop
+        ctx.font = 'bold 24px monospace';
+        ctx.fillText('▶ HALF-LIFE: ALYX', 290, 250);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '16px sans-serif';
+        ctx.fillText('• Разрешение: Dual Micro-OLED 4K (3840x3550 per eye)', 290, 295);
+        ctx.fillText('• Физика взаимодействия: 6DoF отслеживание рук', 290, 335);
+        ctx.fillText('• Пространственный 3D-звук Spatial Audio', 290, 375);
+        ctx.fillText('• Плавность 120 Гц без укачивания', 290, 415);
+
+        // Green Play Button
+        ctx.fillStyle = 'linear-gradient(135deg, #10b981, #059669)';
+        ctx.fillStyle = '#10b981';
+        ctx.beginPath();
+        ctx.roundRect(290, 470, 320, 55, 10);
+        ctx.fill();
+        ctx.fillStyle = '#021008';
+        ctx.font = 'bold 20px sans-serif';
+        ctx.fillText('▶ ЗАПУСТИТЬ В VR-ОЧКАХ', 330, 505);
+
+        // Featured Game Card 2: Beat Saber VR
+        ctx.fillStyle = 'rgba(6, 12, 28, 0.9)';
+        ctx.beginPath();
+        ctx.roundRect(885, 200, 595, 380, 12);
+        ctx.fill();
+        ctx.strokeStyle = '#ff007f';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
         ctx.fillStyle = '#00f0ff';
-        ctx.font = 'bold 38px monospace';
-        ctx.fillText('ПОДКЛЮЧЕНО К ПК ЧЕРЕЗ VIRTUAL DESKTOP', 60, 160);
+        ctx.font = 'bold 24px monospace';
+        ctx.fillText('⚡ BEAT SABER VR // РЕАЛИСТИЧНЫЙ СЛЭШЕР', 915, 250);
+        ctx.fillStyle = '#cbd5e1';
+        ctx.font = '16px sans-serif';
+        ctx.fillText('• Лазерные световые мечи с тактильной отдачей', 915, 295);
+        ctx.fillText('• Неоновые кубы летят в такт киберпанк-саундтрека', 915, 335);
+        ctx.fillText('• Полноценный играбельный симулятор на сайте!', 915, 375);
+        ctx.fillText('• Скидка 20% при заказе у Амирхана (+7 777 777 7777)', 915, 415);
+
+        // Magenta Play Button
+        ctx.fillStyle = '#ff007f';
+        ctx.beginPath();
+        ctx.roundRect(915, 470, 340, 55, 10);
+        ctx.fill();
         ctx.fillStyle = '#ffffff';
-        ctx.font = '24px sans-serif';
-        ctx.fillText('Бесшовное управление мышью, клавиатурой и геймпадом', 60, 230);
-        ctx.fillText('Работайте на 3 гигантских виртуальных мониторах', 60, 280);
+        ctx.font = 'bold 20px sans-serif';
+        ctx.fillText('⚡ СЫГРАТЬ В BEAT SABER', 955, 505);
+
+        // Bottom Telemetry Strip inside window
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.fillRect(260, 605, 1220, 65);
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 15px sans-serif';
+        ctx.fillText('🖥️ Подключено к рабочему столу ПК через Wi-Fi 7 и USB-C 40Gbps', 290, 642);
         ctx.fillStyle = '#00f0ff';
-        ctx.fillText('✓ Доступно на ПК (Windows 11 / 10)', 60, 350);
-        ctx.fillText('✓ Доступно на смартфонах (iOS & Android Companion)', 60, 400);
+        ctx.fillText('Заказ шлема у Амирхана: +7 777 777 7777 (Скидка 20%)', 1000, 642);
+
+      } else if (idx === 0) {
+        // =====================================================================
+        // LEFT MONITOR: STEAMVR LIBRARY & SETTINGS
+        // =====================================================================
+        drawWindowFrame(ctx, 230, 80, 1280, 700, 'SteamVR Library & Display Settings // 4K 120Hz', '📂');
+
+        ctx.fillStyle = '#00f0ff';
+        ctx.font = 'bold 28px monospace';
+        ctx.fillText('БИБЛИОТЕКА VR-ИГР И СИМУЛЯТОРОВ 2026', 280, 160);
+
+        const gamesList = [
+          { title: '1. Beat Saber VR', desc: 'Ритм-слэшер, полный интерактив, 120 FPS' },
+          { title: '2. Half-Life: Alyx', desc: 'Флагманский сюжетный AAA-шутер нового поколения' },
+          { title: '3. Cyberpunk 2077 VR Mod', desc: 'Полномасштабный Найт-Сити с трассировкой лучей' },
+          { title: '4. Assetto Corsa Competizione', desc: 'Ультрареалистичный автосимулятор с рулем' },
+          { title: '5. Microsoft Flight Simulator 2024', desc: 'Полеты над всем земным шаром в 3D' }
+        ];
+
+        gamesList.forEach((gm, gIdx) => {
+          const gy = 210 + gIdx * 90;
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.04)';
+          ctx.beginPath();
+          ctx.roundRect(280, gy, 1180, 72, 8);
+          ctx.fill();
+
+          ctx.fillStyle = '#ffffff';
+          ctx.font = 'bold 20px monospace';
+          ctx.fillText(gm.title, 310, gy + 32);
+
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = '15px sans-serif';
+          ctx.fillText(gm.desc, 310, gy + 56);
+
+          ctx.fillStyle = '#10b981';
+          ctx.font = 'bold 14px monospace';
+          ctx.fillText('✓ УСТАНОВЛЕНО', 1310, gy + 42);
+        });
+
       } else {
-        // Code / Productivity
-        ctx.fillStyle = '#7928ca';
-        ctx.font = 'bold 36px monospace';
-        ctx.fillText('CODE & WORKSPACE 360°', 60, 160);
-        ctx.fillStyle = '#a0aec0';
-        ctx.font = '20px monospace';
-        ctx.fillText('const vrSession = await navigator.xr.requestSession();', 60, 230);
-        ctx.fillText('vrSession.enableUltraLowLatency({ pcLink: true });', 60, 270);
-        ctx.fillText('// 120 FPS ultra-smooth viewport synchronization', 60, 310);
-        ctx.fillText('// Full compatibility: PC + SteamVR + Mobile WebXR', 60, 350);
+        // =====================================================================
+        // RIGHT MONITOR: MICROSOFT EDGE BROWSER WITH NEXUS VR STORE & AMIRKHAN
+        // =====================================================================
+        drawWindowFrame(ctx, 230, 80, 1280, 700, 'Microsoft Edge — NEXUS VR Официальный Магазин', '🌐');
+
+        // Address Bar
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.06)';
+        ctx.beginPath();
+        ctx.roundRect(280, 140, 1180, 42, 8);
+        ctx.fill();
+        ctx.fillStyle = '#10b981';
+        ctx.font = '15px monospace';
+        ctx.fillText('🔒 https://nexus-vr.io/order-sale-20-amirkhan', 305, 167);
+
+        // Store Discount Promo Banner
+        ctx.fillStyle = 'linear-gradient(90deg, rgba(255,0,127,0.2), rgba(0,240,255,0.2))';
+        ctx.fillStyle = 'rgba(255, 0, 127, 0.2)';
+        ctx.beginPath();
+        ctx.roundRect(280, 205, 1180, 60, 8);
+        ctx.fill();
+        ctx.fillStyle = '#ff007f';
+        ctx.font = 'bold 20px monospace';
+        ctx.fillText('🔥 ГОРЯЧАЯ СКИДКА ДО -20% АКТИВИРОВАНА (ПРОМОКОД: AMIRKHAN)', 310, 242);
+
+        // Price Cards Comparison
+        const tariffs = [
+          { name: 'NEXUS LITE', old: '65 000 ₽', cur: '52 000 ₽', kzt: '264 000 ₸', f: '4K Micro-OLED 90Hz' },
+          { name: 'NEXUS PRO ⭐', old: '95 000 ₽', cur: '76 000 ₽', kzt: '384 000 ₸', f: 'Dual 4K 120Hz + LiDAR' },
+          { name: 'NEXUS ULTIMATE', old: '130 000 ₽', cur: '104 000 ₽', kzt: '520 000 ₸', f: 'Pro + Тактильный жилет' }
+        ];
+
+        tariffs.forEach((tr, tIdx) => {
+          const tx = 280 + tIdx * 400;
+          ctx.fillStyle = tIdx === 1 ? 'rgba(0, 240, 255, 0.12)' : 'rgba(255, 255, 255, 0.04)';
+          ctx.beginPath();
+          ctx.roundRect(tx, 285, 380, 240, 10);
+          ctx.fill();
+          if (tIdx === 1) {
+            ctx.strokeStyle = '#00f0ff';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+          }
+
+          ctx.fillStyle = tIdx === 1 ? '#00f0ff' : '#ffffff';
+          ctx.font = 'bold 18px monospace';
+          ctx.fillText(tr.name, tx + 24, 320);
+
+          ctx.fillStyle = '#94a3b8';
+          ctx.font = '14px sans-serif';
+          ctx.fillText(`Старая цена: ${tr.old}`, tx + 24, 350);
+
+          ctx.fillStyle = '#ff007f';
+          ctx.font = 'bold 28px monospace';
+          ctx.fillText(tr.cur, tx + 24, 390);
+
+          ctx.fillStyle = '#ffb703';
+          ctx.font = '16px monospace';
+          ctx.fillText(tr.kzt, tx + 24, 420);
+
+          ctx.fillStyle = '#cbd5e1';
+          ctx.font = '14px sans-serif';
+          ctx.fillText(tr.f, tx + 24, 460);
+
+          ctx.fillStyle = tIdx === 1 ? '#00f0ff' : 'rgba(255,255,255,0.1)';
+          ctx.beginPath();
+          ctx.roundRect(tx + 24, 480, 330, 36, 6);
+          ctx.fill();
+          ctx.fillStyle = tIdx === 1 ? '#020612' : '#ffffff';
+          ctx.font = 'bold 14px sans-serif';
+          ctx.fillText('ЗАКАЗАТЬ СО СКИДКОЙ 20%', tx + 80, 503);
+        });
+
+        // Amirkhan Contact Card inside Edge
+        ctx.fillStyle = 'rgba(0, 240, 255, 0.08)';
+        ctx.beginPath();
+        ctx.roundRect(280, 545, 1180, 110, 10);
+        ctx.fill();
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 18px sans-serif';
+        ctx.fillText('Консультант и основатель: Амирхан', 310, 580);
+        ctx.fillStyle = '#00f0ff';
+        ctx.font = 'bold 28px monospace';
+        ctx.fillText('📞 +7 777 777 7777', 310, 620);
+        ctx.fillStyle = '#10b981';
+        ctx.font = '16px sans-serif';
+        ctx.fillText('● Вам ответит лично: Амирхан (Звонок, WhatsApp, Telegram)', 720, 620);
       }
 
+      // 4. Draw Windows 11 Taskbar across bottom
+      drawWin11Taskbar(ctx, 1600, 900);
+
+      // Create Three.js Texture with crisp mipmaps
       const screenTex = new THREE.CanvasTexture(sCanvas);
+      screenTex.minFilter = THREE.LinearFilter;
+      screenTex.magFilter = THREE.LinearFilter;
       const screenMat = new THREE.MeshBasicMaterial({
         map: screenTex,
         side: THREE.DoubleSide
@@ -456,7 +831,7 @@ class VRSimulator {
 
     const waypoints = {
       arena: { pos: { x: 0, y: 0, z: 0.1 }, look: { lon: -90, lat: 0 } },
-      desktop: { pos: { x: 0, y: 1.2, z: -7.5 }, look: { lon: -90, lat: 0 } },
+      desktop: { pos: { x: 0, y: 1.2, z: -8.0 }, look: { lon: -90, lat: 0 } },
       tower: { pos: { x: 16, y: 10, z: 10 }, look: { lon: -135, lat: -20 } },
       bridge: { pos: { x: -14, y: 1.5, z: -4 }, look: { lon: -35, lat: 5 } }
     };
@@ -472,8 +847,8 @@ class VRSimulator {
         desc: 'Плавное скольжение без задержек. Угол обзора 110° и частота 120 Гц исключают укачивание.'
       },
       desktop: {
-        badge: 'РЕЖИМ: ВИРТУАЛЬНЫЙ РАБОЧИЙ СТОЛ ПК',
-        desc: 'Удобно для тех, у кого есть ПК: подключитесь по Wi-Fi 7 или USB-C и откройте 3 гигантских 4K монитора для игр SteamVR и работы.'
+        badge: 'РЕЖИМ: ВИРТУАЛЬНЫЙ РАБОЧИЙ СТОЛ WINDOWS 11 (120 FPS)',
+        desc: 'Полноценный рабочий стол Windows 11 на 3 мониторах: играйте в SteamVR (Half-Life, Beat Saber), работайте и заказывайте шлем со скидкой 20% у Амирхана (+7 777 777 7777).'
       },
       tower: {
         badge: 'РЕЖИМ: СМОТРОВАЯ ПЛОЩАДКА',

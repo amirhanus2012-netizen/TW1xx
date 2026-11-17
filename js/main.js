@@ -104,13 +104,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Flash Sale Live Countdown Timer
+  // Flash Sale Live Countdown Timer (16 Hours)
   const tHours = document.getElementById('t-hours');
   const tMins = document.getElementById('t-mins');
   const tSecs = document.getElementById('t-secs');
 
   if (tHours && tMins && tSecs) {
-    let totalSeconds = 4 * 3600 + 28 * 60 + 19; // 4 hours 28 mins 19 secs
+    let totalSeconds = 16 * 3600; // 16 hours exactly as requested
     setInterval(() => {
       if (totalSeconds > 0) {
         totalSeconds--;

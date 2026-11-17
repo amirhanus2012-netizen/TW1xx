@@ -5,7 +5,7 @@
  * - Windows 11 Taskbar, Start Menu, Real-time Clock, System Tray
  * - Real playable "Beat Saber VR" rhythm slicer (Canvas 60-120fps with laser swords & sound)
  * - Real playable "Cyber Target 3D" VR shooter with crosshair, recoil, and score
- * - Windows Store with instant ordering, -40% discount, and Amirkhan's phone +7 777 777 7777
+ * - Windows Store with instant ordering, -20% discount, and Amirkhan's phone +7 777 777 7777
  * - Proxy Guard Firewall window & Direct Amirkhan Caller window
  */
 
